@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using System.Linq;
 
 namespace NoMissText
 {
@@ -9,16 +8,9 @@ namespace NoMissText
     {
         private static bool Prefix()
         {
-            if (PluginConfig.Instance.NoTextAnywhere)
+            bool dataModel = BS_Utils.Plugin.LevelData.GameplayCoreSceneSetupData.playerSpecificSettings.noTextsAndHuds;
+            if (PluginConfig.Instance.NoTextAnywhere || dataModel)
                 return false;
-            else
-            {
-                PlayerDataModel dataModel = UnityEngine.Resources.FindObjectsOfTypeAll<PlayerDataModel>().FirstOrDefault();
-                if ((dataModel?.playerData.playerSpecificSettings.noTextsAndHuds ?? false))
-                {
-                    return false;
-                }
-            }
             return true;
         }
     }
