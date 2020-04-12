@@ -7,7 +7,7 @@ using IPALogger = IPA.Logging.Logger;
 
 namespace NoMissText
 {
-    [Plugin(RuntimeOptions.SingleStartInit)]
+    [Plugin(RuntimeOptions.DynamicInit)]
     internal class Plugin
     {
         internal static Harmony harmony;
@@ -20,15 +20,15 @@ namespace NoMissText
             Logger.Log("Config loaded");
         }
 
-        [OnStart]
-        public void OnStart()
+        [OnEnable]
+        public void OnEnable()
         {
             harmony = new Harmony("com.CyanSnow.BeatSaber.NoMissText");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
-        [OnExit]
-        public void OnExit()
+        [OnDisable]
+        public void OnDisable()
         {
             harmony.UnpatchAll("com.CyanSnow.BeatSaber.NoMissText");
         }
