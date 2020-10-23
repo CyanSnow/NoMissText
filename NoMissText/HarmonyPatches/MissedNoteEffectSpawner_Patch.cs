@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using NoMissText.UI;
 
 namespace NoMissText
 {
@@ -8,8 +9,7 @@ namespace NoMissText
     {
         private static bool Prefix()
         {
-            bool dataModel = BS_Utils.Plugin.LevelData.GameplayCoreSceneSetupData.playerSpecificSettings.noTextsAndHuds;
-            if (PluginConfig.Instance.NoTextAnywhere || dataModel)
+            if (NoMissTextConfig.Instance.HideMissText)
                 return false;
             return true;
         }

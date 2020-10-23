@@ -4,6 +4,8 @@ using IPA.Config;
 using IPA.Config.Stores;
 using System.Reflection;
 using IPALogger = IPA.Logging.Logger;
+using BeatSaberMarkupLanguage.GameplaySetup;
+using NoMissText.UI;
 
 namespace NoMissText
 {
@@ -16,8 +18,7 @@ namespace NoMissText
         public Plugin(IPALogger pluginLogger, Config config)
         {
             Logger.logger = pluginLogger;
-            PluginConfig.Instance = config.Generated<PluginConfig>();
-            Logger.Log("Config loaded");
+            NoMissTextConfig.Instance = config.Generated<NoMissTextConfig>();
         }
 
         [OnEnable]
@@ -25,12 +26,14 @@ namespace NoMissText
         {
             harmony = new Harmony("com.CyanSnow.BeatSaber.NoMissText");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
+            GameplaySetup.instance.AddTab("No Miss Text", "NoMissText.UI.settings.bsml", NoMissTextUI.instance);
         }
 
         [OnDisable]
         public void OnDisable()
         {
             harmony.UnpatchAll("com.CyanSnow.BeatSaber.NoMissText");
+            GameplaySetup.instance.RemoveTab("No Miss Text");
         }
     }
 }
