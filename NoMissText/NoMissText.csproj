@@ -60,7 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HarmonyPatches\MissedNoteEffectSpawner_Patch.cs" />
+    <Compile Include="HarmonyPatches\ComboUIControllerHandleComboBreakingEventHappened.cs" />
+    <Compile Include="HarmonyPatches\MissedNoteEffectSpawnerSpawnFlyingSprite.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,9 +3,8 @@ using NoMissText.UI;
 
 namespace NoMissText
 {
-    [HarmonyPatch(typeof(FlyingSpriteSpawner))]
-    [HarmonyPatch("SpawnFlyingSprite")]
-    class MissedNoteEffectSpawner_Patch
+    [HarmonyPatch(typeof(FlyingSpriteSpawner), "SpawnFlyingSprite")]
+    class MissedNoteEffectSpawnerSpawnFlyingSprite
     {
         private static bool Prefix()
         {
