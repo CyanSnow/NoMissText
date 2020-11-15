@@ -1,15 +1,25 @@
-﻿using HarmonyLib;
+﻿using BS_Utils.Utilities;
+using HarmonyLib;
+using IPA.Utilities;
 using NoMissText.UI;
 
 namespace NoMissText
 {
     [HarmonyPatch(typeof(ComboUIController), "HandleComboBreakingEventHappened")]
-    class ComboUIControllerHandleComboBreakingEventHappened
+    class HandleComboBreakingEventHappened
     {
-        static bool Prefix()
+        static bool Prefix(ComboUIController __instance)
         {
             if (NoMissTextConfig.Instance.HideDumbFCBreakLines)
+            {
+                if (!__instance.GetField<bool>("_comboLost"))
+                {
+                    __instance.SetField("_comboLost", true);
+                    __instance.transform.Find("Line0").gameObject.SetActive(false);
+                    __instance.transform.Find("Line1").gameObject.SetActive(false);
+                }
                 return false;
+            }
             return true;
         }
     }
