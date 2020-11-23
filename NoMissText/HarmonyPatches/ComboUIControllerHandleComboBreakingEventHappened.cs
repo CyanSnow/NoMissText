@@ -1,5 +1,4 @@
-﻿using BS_Utils.Utilities;
-using HarmonyLib;
+﻿using HarmonyLib;
 using IPA.Utilities;
 using NoMissText.UI;
 
@@ -12,11 +11,13 @@ namespace NoMissText
         {
             if (NoMissTextConfig.Instance.HideDumbFCBreakLines)
             {
-                if (!__instance.GetField<bool>("_comboLost"))
+                if (!__instance.GetField<bool, ComboUIController>("_comboLost"))
                 {
                     __instance.SetField("_comboLost", true);
                     __instance.transform.Find("Line0").gameObject.SetActive(false);
                     __instance.transform.Find("Line1").gameObject.SetActive(false);
+
+
                 }
                 return false;
             }
