@@ -6,6 +6,7 @@ using System.Reflection;
 using IPALogger = IPA.Logging.Logger;
 using BeatSaberMarkupLanguage.GameplaySetup;
 using NoMissText.UI;
+using System;
 
 namespace NoMissText
 {
@@ -31,8 +32,17 @@ namespace NoMissText
         [OnEnable]
         public void OnEnable()
         {
-            harmony = new Harmony("com.CyanSnow.BeatSaber.NoMissText");
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
+            try
+            {
+                harmony.PatchAll(Assembly.GetExecutingAssembly());
+                Log.Debug("Applying Harmony pathces.");
+            }
+            catch (Exception ex)
+            {
+                Log.Critical("Error applying Harmony patches: " + ex.Message);
+                Log.Debug(ex);
+            }
+
             GameplaySetup.instance.AddTab("No Miss Text", "NoMissText.UI.settings.bsml", NoMissTextUI.instance);
         }
 
