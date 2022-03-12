@@ -2,10 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/nike4613/ModSaber-MetadataFileSchema/master/Schema.json",
   "author": "CyanSnow",
   "description": "Hides the flying text when a note is missed",
-  "gameVersion": "1.16.1",
+  "gameVersion": "1.20.0",
   "id": "NoMissText",
   "name": "NoMissText",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "dependsOn": {
     "BSIPA": "^4.1.6",
     "BeatSaberMarkupLanguage": "^1.5.1"

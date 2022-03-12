@@ -9,16 +9,23 @@ using NoMissText.UI;
 
 namespace NoMissText
 {
-    [Plugin(RuntimeOptions.DynamicInit)]
+    [Plugin(RuntimeOptions.SingleStartInit)]
     internal class Plugin
     {
-        internal static Harmony harmony;
+        public const string HarmonyId = "com.CyanSnow.BeatSaber.NoMissText";
+        internal static Harmony harmony = new Harmony(HarmonyId);
+
+        internal static Plugin instance { get; private set; }
+        internal static IPALogger Log { get; private set; }
 
         [Init]
-        public Plugin(IPALogger pluginLogger, Config config)
+        public void Init(IPALogger logger, Config config)
         {
-            Logger.logger = pluginLogger;
+            instance = this;
+            Log = logger;
+            Log.Info("No Miss Text initialized.");
             NoMissTextConfig.Instance = config.Generated<NoMissTextConfig>();
+            Log.Debug("Logger initialized.");
         }
 
         [OnEnable]
@@ -32,7 +39,9 @@ namespace NoMissText
         [OnDisable]
         public void OnDisable()
         {
-            harmony.UnpatchAll("com.CyanSnow.BeatSaber.NoMissText");
+            //harmony.UnpatchAll("com.CyanSnow.BeatSaber.NoMissText");
+
+            harmony.UnpatchSelf();
             GameplaySetup.instance.RemoveTab("No Miss Text");
         }
     }
