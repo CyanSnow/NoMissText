@@ -49,8 +49,6 @@ namespace NoMissText
         [OnDisable]
         public void OnDisable()
         {
-            //harmony.UnpatchAll("com.CyanSnow.BeatSaber.NoMissText");
-
             harmony.UnpatchSelf();
             GameplaySetup.instance.RemoveTab("No Miss Text");
         }
