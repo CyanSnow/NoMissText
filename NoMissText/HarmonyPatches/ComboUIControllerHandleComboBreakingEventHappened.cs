@@ -11,13 +11,11 @@ namespace NoMissText
         {
             if (NoMissTextConfig.Instance.HideDumbFCBreakLines)
             {
-                if (!__instance.GetField<bool, ComboUIController>("_comboLost"))
+                if (!__instance.GetField<bool, ComboUIController>("_fullComboLost"))
                 {
-                    __instance.SetField("_comboLost", true);
+                    __instance.SetField("_fullComboLost", true);
                     __instance.transform.Find("Line0").gameObject.SetActive(false);
                     __instance.transform.Find("Line1").gameObject.SetActive(false);
-
-
                 }
                 return false;
             }
